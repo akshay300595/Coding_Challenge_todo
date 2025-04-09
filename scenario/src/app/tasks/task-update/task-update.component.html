@@ -1,2 +1,29 @@
-<h2>Task Update Component</h2>
-<p>Create your task update form below</p>
+<!-- You do not need to change this file -->
+<h2>Update Task </h2>
+
+  <div class="input-container">
+    <label for="name">Id :</label>
+    <input type="text" id="name" name="name" [(ngModel)]=id (ngModelChange)="onIdChange()" required>
+  </div>
+  <br>
+
+<form (ngSubmit)="onSubmit()" #taskForm="ngForm">
+      <div class="input-container">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="task.name" required>
+      </div>
+      <div class="input-container">
+        <label for="dueDate">Due Date:</label>
+        <input type="date" id="dueDate" name="dueDate" [(ngModel)]="task.due" required>
+      </div>
+      <div class="input-container">
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" [(ngModel)]="task.description" required>
+      </div>
+      <div class="input-container">
+        <label for="complete">Complete:</label>
+        <input type="checkbox" id="complete" name="complete" [(ngModel)]="task.complete">
+      </div>
+      <button type="submit" class="submit-cta" [disabled]="!taskForm.form.valid">Update</button>
+</form>
+<br/>

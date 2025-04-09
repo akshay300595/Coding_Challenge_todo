@@ -8,7 +8,7 @@ import { TaskUpdateComponent } from './task-update/task-update.component';
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [TaskCreateComponent, TaskDeleteComponent, TaskDisplayComponent, TaskUpdateComponent],
+  imports: [TaskDisplayComponent],
   templateUrl: './tasks.component.html',
 })
 export class TasksComponent {

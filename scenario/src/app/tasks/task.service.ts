@@ -23,11 +23,18 @@ export class TaskService {
       tasks => this.tasksSubject.next(tasks));
   }
 
-  /*
-   * This is the only function that you'll need to change in this service.
-   * It should update an already existing task entry with new information entered by the user
-   */
-  updateTask(id: string, task: Task): void { }
+  fetchTask(id: string | null): Observable<TaskAndId>{
+    return this.http.get<TaskAndId>(`${this.apiUrl}/${id ?? ''}`)
+    }
+
+
+  updateTask(id: string | null, task: Task): void { 
+    this.http.put<TaskAndId>(this.apiUrl, {_id: id ?? '', task}).subscribe({
+      next: () => {
+        this.refreshTasks()
+      }
+    })
+  }
 
   createTask(newTask: Task): void {
     this.http.post(this.apiUrl, { task: newTask }).subscribe({

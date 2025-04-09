@@ -1,5 +1,5 @@
 // No need to change this file
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { TaskService } from '../task.service';
 import { FormsModule } from '@angular/forms';
 
@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './task-delete.component.html',
 })
 export class TaskDeleteComponent {
+  @Output() closeCompEvent : EventEmitter<boolean> = new EventEmitter<boolean>();
   protected taskId: string = ''
 
   constructor(private taskService: TaskService) { }
@@ -17,5 +18,6 @@ export class TaskDeleteComponent {
   protected onSubmit(): void {
     this.taskService.deleteTask(this.taskId)
     this.taskId = ''
+    this.closeCompEvent.emit(true);
   }
 }

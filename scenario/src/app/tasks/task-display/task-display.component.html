@@ -1,14 +1,53 @@
 <!-- You do not need to change this file -->
-<div>
-  <h2>Task Display Component</h2>
+<div class="display-main-container">
+
+  <div class="create-task-cta-container">
+      <button (click)="takeAction('CREATE')" class="create-task-cta">Create Task</button>
+      <button (click)="takeAction('DELETE')" class="delete-task-cta">Delete Task</button>
+  </div>
+
   @for (task of tasks$ | async; track $index) {
-  <div>
-    <h3>{{ task.name }}</h3>
-    <p>id: <strong>{{ task._id }}</strong></p>
-    <p>Due Date: <strong>{{ task.due }}</strong></p>
-    <p>Description: <strong>{{ task.description }}</strong></p>
-    <p>Complete: <strong>{{ task.complete }}</strong></p>
+  <div class="task-container">
+    <div class="card-title">
+      <h3>{{ task.name }}</h3>
+      <p class="desc-text task-id"><strong>id: </strong>{{ task._id }}</p>
+      <p>{{ task.due | timeFormat}}</p>
+    </div>
+    
+    <div class="content-container">
+      <div class="description-container">
+      <p class="desc-text"><strong>{{ task.description }}</strong></p>
+      <p class="desc-text">Complete: <strong [ngClass]="{'success-color': task.complete, 'error-color' : !task.complete}">{{ task.complete }}</strong></p>
+      </div>
+
+      <div class="action-container">
+        <img src="assets/edit-icon.svg" alt="" (click)="takeAction('UPDATE', task._id)">
+      </div>
+    </div>
+    
   </div>
   <br />
   }
+</div>
+
+
+<div class="modal-container" *ngIf="modalIsActive">
+  <div class="modal-content">
+    <div class="close-container" (click)="closeModal()"> 
+      <img src="../../../assets/close_icon.svg" alt="">
+    </div>
+
+    <div class="modal-comp-container">
+      <app-task-create *ngIf="taskActions == 'CREATE'" (closeCompEvent)="closeModal()"></app-task-create>
+    </div>
+
+    <div class="modal-comp-container">
+      <app-task-delete *ngIf="taskActions == 'DELETE'" (closeCompEvent)="closeModal()"></app-task-delete>
+    </div>
+    
+    <div class="modal-comp-container">
+      <app-task-update *ngIf="taskActions == 'UPDATE'" [id]="taskId" (closeCompEvent)="closeModal()"></app-task-update>
+    </div>
+  </div>
+  
 </div>

@@ -1,9 +1,9 @@
 <!-- You do not need to change this file -->
-<h2>Task Delete Component</h2>
+<h2>Delete Task</h2><br>
 <form (ngSubmit)="onSubmit()">
-  <div>
+  <div class="input-container">
     <label for="taskId">Task Id to Delete:</label>
     <input type="text" id="taskId" name="taskId" [(ngModel)]="taskId" required/>
   </div>
-  <button type="submit">Submit</button>
+  <button class="submit-cta" type="submit">Submit</button>
 </form>

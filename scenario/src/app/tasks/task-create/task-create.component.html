@@ -1,22 +1,23 @@
 <!-- You do not need to change this file -->
-<h2>Task Create Component</h2>
+
+<h2>Create Task</h2>
 <form (ngSubmit)="onSubmit()" #taskForm="ngForm">
-      <div>
+      <div class="input-container">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" [(ngModel)]="task.name" required>
       </div>
-      <div>
+      <div class="input-container">
         <label for="dueDate">Due Date:</label>
         <input type="date" id="dueDate" name="dueDate" [(ngModel)]="task.due" required>
       </div>
-      <div>
+      <div class="input-container">
         <label for="description">Description:</label>
         <input type="text" id="description" name="description" [(ngModel)]="task.description" required>
       </div>
-      <div>
+      <div class="input-container">
         <label for="complete">Complete:</label>
         <input type="checkbox" id="complete" name="complete" [(ngModel)]="task.complete">
       </div>
-      <button type="submit" [disabled]="!taskForm.form.valid">Register</button>
+      <button type="submit"  class="submit-cta" [disabled]="!taskForm.form.valid">Register</button>
 </form>
 <br/>

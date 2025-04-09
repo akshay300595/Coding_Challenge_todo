@@ -33,16 +33,26 @@ app.get('/healthcheck', function(req, res) {
   return
 })
 
+
 app.use(function(req, res, next) {
   console.log(req.method + ' request at route ' + req.url)
   next()
 })
 
+
+app.get('/api/tasks/:id', async (req, res) => {
+  const { id } = req.params;
+  const task = await TaskModel.findOne({_id : id});
+  res.json(task)
+  return
+})
+
 app.get('/api/tasks', async (req, res) => {
-  const tasks = await TaskModel.find()
+  const tasks = await TaskModel.find();
   res.json(tasks)
   return
 })
+
 
 app.post('/api/tasks', async (req, res) => {
   const { task } = req.body
@@ -50,6 +60,14 @@ app.post('/api/tasks', async (req, res) => {
   await TaskModel.create(task)
   res.status(201).send()
   return
+})
+
+app.put('/api/tasks', async(req, res) =>{
+  const {task ,_id} = req.body;
+  console.log(task);
+  await TaskModel.updateOne({_id},task)
+  res.status(201).send()
+  return 
 })
 
 /* Create your new route here */
